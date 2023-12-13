@@ -1,11 +1,16 @@
 {
   "name": "nft-fetcher",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "types": "index.d.ts",
   "description": "fetch nfts from nft-indexer",
   "author": "h0ward.eth",
   "main": "src/App.js",
   "license": "MIT",
+  "homepage": "https://github.com/Zerobeings/nft-fetcher#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zerobeings/nft-fetcher.git"
+  },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.6.2",
