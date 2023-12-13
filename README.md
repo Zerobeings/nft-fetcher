@@ -2,6 +2,16 @@
 
 This project is a JavaScript library for fetching NFT data from a SQLite database. It's adapted from the [Mixtape Network](https://github.com/mixtape-network). This library is intended to be used with the [nft-indexer](https://github.com/Zerobeings/nft-indexer) project.
 
+## Quick Start Method
+
+The quickest way to get started is to use the nextjs nft-fetcher-template repository.
+
+```bash
+git clone https://github.com/Zerobeings/nft-fetcher-template.git
+cd nft-fetcher-template
+yarn install
+```
+
 ## Installation
 
 ```bash
@@ -183,10 +193,6 @@ module.exports = nextConfig;
 ```
 
 Step 2: Create a `public` folder named `db` in the root of your project and add the `sql-wasm-595817d88d82727f463bc4b73e0a64cf.wasm` file to it. You can download the file from [here](https://github.com/Zerobeings/nft-indexer/tree/main/nextjs-db-file)
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
