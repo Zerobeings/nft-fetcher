@@ -1,7 +1,7 @@
 {
   "name": "nft-fetcher",
-  "version": "0.0.14",
-  "types": "index.d.ts",
+  "version": "1.0.2",
+  "types": "src/index.d.ts",
   "description": "fetch nfts from nft-indexer",
   "author": "h0ward.eth",
   "main": "src/App.js",
