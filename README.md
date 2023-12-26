@@ -59,15 +59,23 @@ export default function Contract() {
                 if (chain) {
                     setNetwork(chain['slug']);
                 }
-                const limit = 100;
-                const start = 0;
-                const where = [] as any[];
-                const select = "*";
-                const dbURL = ""
+                const limit = 100; // Optional - the maximum number of NFTs to fetch.
+                const start = 0; // Optional - the offset to start fetching from.
+                const where = [] as any[]; // Optional - an array of column names to include in the result. If empty, all columns are included.
+                const select = "*"; // Optional - an array of column names to include in the result. If empty, all columns are included.
+                const dbURL = "" as string; // Optional - the URL of the SQLite database. If not provided, a default URL is used.
                 if(contractAddress && network && chain) {
                     try {
                         console.log('Fetching NFTs...');
-                        const nfts = await getMixtapeNFTs(contractAddress, limit, start, select, where, dbURL, network);
+                        const nfts = await getMixtapeNFTs(contractAddress, network, 
+                            {
+                                limit: limit, 
+                                start: start, 
+                                where: where,
+                                select: select,
+                                dbURL: dbURL
+                            }
+                        );
                         console.log(nfts);
                         setNfts(nfts);
                         setLoading(false);
@@ -193,6 +201,11 @@ module.exports = nextConfig;
 ```
 
 Step 2: Create a `public` folder named `db` in the root of your project and add the `sql-wasm-595817d88d82727f463bc4b73e0a64cf.wasm` file to it. You can download the file from [here](https://github.com/Zerobeings/nft-indexer/tree/main/nextjs-db-file)
+
+Step 3: Create an nft-fetcher.d.ts file in the root of your project and add the following code to it.
+```javascript
+declare module 'nft-fetcher';
+```
 
 ## License
 

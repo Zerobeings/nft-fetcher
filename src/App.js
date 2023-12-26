@@ -63,6 +63,13 @@ async function queryDatabase(db, sqlQuery, queryParams) {
             'mimeType',
             'youtube_url',
             'background_color',
+            'imageHash',
+            'edition',
+            'custom_fields',
+            'file_url',
+            'file',
+            'license',
+            'license_url',
           ].includes(col)
         ) {
           nft[col] = row[index];
@@ -76,32 +83,45 @@ async function queryDatabase(db, sqlQuery, queryParams) {
   return [];
 }
 
-async function getMixtapeNFTs(contractAddress, limit, start, select, where, dbURL, network) {
-  if (Array.isArray(select) && select.length > 0) {
-    select = select.join(', ');
-  }
-  let sqlQuery = `SELECT ${select} FROM metadata`;
-  if (Array.isArray(where) && where.length > 0) {
-    sqlQuery += ` WHERE ${where.join(' AND ')}`;
-  }
-  if (limit > 0 && limit !== undefined) {
-    sqlQuery += ` LIMIT ${limit}`;
-  } else {
-    sqlQuery += ` LIMIT 100`;
-  }
-  if (start > 0 && start !== undefined) {
-    sqlQuery += ` OFFSET ${start}`;
-  } else {
-    sqlQuery += ` OFFSET 0`;
-  }
-  const repoUrl = dbURL || `https://cors.locatia.app/https://github.com/Zerobeings/nft-indexer/raw/main/${network}/${contractAddress}/`;
-  try {
-    const db = await fetchDatabase(repoUrl, 'mixtape.db');
-    return queryDatabase(db, sqlQuery);
-  } catch (error) {
-    console.error('Error:', error.message);
-    return [];
-  }
+async function getMixtapeNFTs(
+  contractAddress,
+  network,
+  {
+    limit = 100,
+    start = 0,
+    select = '*',
+    where = [],
+    dbURL = ""
+  } = {} 
+  ) {
+    if (!contractAddress || !network) {
+      throw new Error('Contract address and network are required parameters.');
+    }
+    if (Array.isArray(select) && select.length > 0) {
+      select = select.join(', ');
+    }
+    let sqlQuery = `SELECT ${select} FROM metadata`;
+    if (Array.isArray(where) && where.length > 0) {
+      sqlQuery += ` WHERE ${where.join(' AND ')}`;
+    }
+    if (limit > 0 && limit !== undefined) {
+      sqlQuery += ` LIMIT ${limit}`;
+    } else {
+      sqlQuery += ` LIMIT 100`;
+    }
+    if (start > 0 && start !== undefined) {
+      sqlQuery += ` OFFSET ${start}`;
+    } else {
+      sqlQuery += ` OFFSET 0`;
+    }
+    const repoUrl = dbURL || `https://cors.locatia.app/https://github.com/Zerobeings/nft-indexer/raw/main/${network}/${contractAddress}/`;
+    try {
+      const db = await fetchDatabase(repoUrl, 'mixtape.db');
+      return queryDatabase(db, sqlQuery);
+    } catch (error) {
+      console.error('Error:', error.message);
+      return [];
+    }
 }
 
 module.exports = getMixtapeNFTs;
