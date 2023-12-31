@@ -1,6 +1,6 @@
 {
   "name": "nft-fetcher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "types": "src/index.d.ts",
   "description": "fetch nfts from nft-indexer",
   "author": "h0ward.eth",
@@ -14,7 +14,6 @@
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.6.2",
-    "browserify-fs": "^1.0.0",
     "console-browserify": "^1.2.0",
     "crypto-browserify": "^3.12.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
